@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Enter names in the fields, then click "Submit" to submit the form:</p>
+
+<input type="text" id="comment" name="comment" value="I'm a text field"/>
+<input type="button" value="submit" OnClick="entered()"/>
+
+<script>
+
+fetch("https://raw.githubusercontent.com/Omicron18/masterword/master/words2.txt")
+.then( response => response.text() )
+.then( text => setAnswer(text) )
+
+function setAnswer(text) {
+    words = text.trim().split("\n")
+    answer=words[Math.floor(Math.random()*words.length)];
+    console.log(answer)
+}
+
+function entered() {
+    var word=document.getElementById("comment").value;
+    if (word===answer) {
+        var s = document.createElement('p');
+        s.textContent="you win!";
+        document.body.appendChild(s);
+    } else {
+        feedback(word,answer);
+/*        var s = document.createElement('p');
+        s.textContent="try again";
+        document.body.appendChild(s);
+*/
+    }
+}
+
+function feedback(word,answer) {
+    var ans = answer.split('');
+
+    var wo = word.split('');
+    if (word.length!=4 || !words.includes(word)) {
+        var s = document.createElement('p');
+        s.textContent="invalid guess";
+        document.body.appendChild(s);
+        return;
+    }
+    var s = document.createElement('p');
+    s.textContent=word;
+    document.body.appendChild(s);
+
+    var right="";
+    for (var i=0; i<4; i++) {
+        if (ans[i]==wo[i]) {
+            right+="+";
+        }
+    }
+    var rightLetter="";
+    var rightN=right.length;
+    for (var i=0; i<4; i++) {
+        if (ans.includes(wo[i])) {
+            rightN--;
+            if (rightN<0) {
+                rightLetter+="/";
+            }
+        }
+    }
+    if (right.length==0 && rightLetter.length==0) {
+        var s = document.createElement('p');
+        s.textContent='.';
+        document.body.appendChild(s);
+
+    } else {
+        var s = document.createElement('p');
+        s.textContent=right+rightLetter;
+        document.body.appendChild(s);
+    }
+
+
+}
+</script>
+
+</body>
+</html>
