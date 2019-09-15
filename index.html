@@ -2,10 +2,9 @@
 <html>
 <body>
 
-<p>Enter names in the fields, then click "Submit" to submit the form:</p>
+<p>Enter your guess: a four letter word, with no repeated letters</p>
 
-<input type="text" id="comment" name="comment" value="I'm a text field"/>
-<input type="button" value="submit" OnClick="entered()"/>
+<input type="text" id="input" name="comment" autocomplete="off" value=""/>
 
 <script>
 
@@ -14,23 +13,22 @@ fetch("https://raw.githubusercontent.com/Omicron18/masterword/master/words2.txt"
 .then( text => setAnswer(text) )
 
 function setAnswer(text) {
-    words = text.trim().split("\n")
+    words = text.trim().split("\n");
     answer=words[Math.floor(Math.random()*words.length)];
-    console.log(answer)
+    console.log(answer);
+    
+    const input = document.getElementById('input');
+    input.addEventListener('change', entered);
 }
 
 function entered() {
-    var word=document.getElementById("comment").value;
+    var word=document.getElementById('input').value;
     if (word===answer) {
         var s = document.createElement('p');
         s.textContent="you win!";
         document.body.appendChild(s);
     } else {
         feedback(word,answer);
-/*        var s = document.createElement('p');
-        s.textContent="try again";
-        document.body.appendChild(s);
-*/
     }
 }
 
@@ -44,9 +42,6 @@ function feedback(word,answer) {
         document.body.appendChild(s);
         return;
     }
-    var s = document.createElement('p');
-    s.textContent=word;
-    document.body.appendChild(s);
 
     var right="";
     for (var i=0; i<4; i++) {
@@ -64,17 +59,16 @@ function feedback(word,answer) {
             }
         }
     }
-    if (right.length==0 && rightLetter.length==0) {
-        var s = document.createElement('p');
-        s.textContent='.';
-        document.body.appendChild(s);
 
+    var s = document.createElement('pre');
+    s.textContent=word+' ';
+    if (right.length==0 && rightLetter.length==0) {
+        s.textContent+='.';
     } else {
-        var s = document.createElement('p');
-        s.textContent=right+rightLetter;
-        document.body.appendChild(s);
+        s.textContent+=right+rightLetter;
     }
 
+    document.body.appendChild(s);
 
 }
 </script>
