@@ -4,7 +4,7 @@
 
 <p>Enter your guess: a four letter word, with no repeated letters</p>
 
-<input type="text" id="input" name="comment" autocomplete="off" value=""/>
+<input type="text" id="input" name="comment" autocomplete="off" value="" autofocus=true/>
 
 <script>
 
@@ -30,6 +30,7 @@ function entered() {
     } else {
         feedback(word,answer);
     }
+    input.value="";
 }
 
 function feedback(word,answer) {
