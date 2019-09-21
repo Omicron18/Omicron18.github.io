@@ -23,17 +23,14 @@ function setAnswer(text) {
 
 function entered() {
     var word=document.getElementById('input').value;
+
+    feedback(word,answer);
     if (word===answer) {
-        var t = document.createElement('pre');
-        t.textContent=word;
-        document.body.appendChild(t);
         var s = document.createElement('p');
         s.textContent="you win!";
         document.body.appendChild(s);
-    } else {
-        feedback(word,answer);
     }
-    input.value="";
+    document.body.removeChild(input);
 }
 
 function feedback(word,answer) {
