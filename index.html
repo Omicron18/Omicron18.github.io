@@ -29,8 +29,8 @@ function entered() {
         var s = document.createElement('p');
         s.textContent="you win!";
         document.body.appendChild(s);
+        document.body.removeChild(input);
     }
-    document.body.removeChild(input);
 }
 
 function feedback(word,answer) {
