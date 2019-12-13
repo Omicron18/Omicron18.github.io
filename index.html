@@ -40,8 +40,8 @@ function feedback(word,answer) {
 
     var wo = word.split('');
     if (word.length!=4 || !words.includes(word)) {
-        var s = document.createElement('p');
-        s.textContent="invalid guess";
+        var s = document.createElement('pre');
+        s.textContent="["+word+"] - invalid guess";
         document.body.appendChild(s);
         return;
     }
