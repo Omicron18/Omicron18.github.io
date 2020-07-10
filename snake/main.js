@@ -61,6 +61,22 @@ function clear(i,j) {
 }
 
 function change_dir(x) {
+    if (x.key==='ArrowUp') {
+        e.key='k';
+        return;
+    }
+    if (x.key==='ArrowDown') {
+        e.key='j';
+        return;
+    }
+    if (x.key==='ArrowLeft') {
+        e.key='h';
+        return;
+    }
+    if (x.key==='ArrowRight') {
+        e.key='l';
+        return;
+    }
     if (x.key==='j' || x.key==='k' || x.key==='h' || x.key==='l') {
         e=x;
     }
