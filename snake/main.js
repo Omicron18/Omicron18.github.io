@@ -25,10 +25,14 @@ function isInSnake(x,y) {
 }
 
 function draw_apple() {
+    let new_a_x=0;
+    let new_a_y=0;
     do {
-        let new_a_x=Math.floor(Math.random()*size);
-        let new_a_y=Math.floor(Math.random()*size);
+        new_a_x=Math.floor(Math.random()*size);
+        new_a_y=Math.floor(Math.random()*size);
     } while (isInSnake(new_a_x,new_a_y) || (new_a_x==a_x && new_a_y==a_y));
+    a_x=new_a_x;
+    a_y=new_a_y;
 
     ctx.fillStyle = 'green';
     ctx.fillRect(1+(a_x*scaling), 1+(a_y*scaling), scaling-1, scaling-1);
