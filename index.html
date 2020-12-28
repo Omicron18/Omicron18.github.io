@@ -1,80 +1,80 @@
 <!DOCTYPE html>
 <html>
-<body>
+    <body>
 
-<p>Enter your guess: a four letter word, with no repeated letters</p>
+        <p>Enter your guess: a four letter word, with no repeated letters</p>
 
-<input type="text" id="input" name="comment" autocomplete="off" value="" autofocus=true/>
+        <input type="text" id="input" name="comment" autocomplete="off" value="" autofocus=true/>
 
-<script>
+        <script>
 
-fetch("https://raw.githubusercontent.com/Omicron18/masterword/master/words2.txt")
-.then( response => response.text() )
-.then( text => setAnswer(text) )
+         fetch("https://raw.githubusercontent.com/Omicron18/masterword/master/words2.txt")
+             .then( response => response.text() )
+             .then( text => setAnswer(text) )
 
-function setAnswer(text) {
-    words = text.trim().split("\n");
-    answer=words[Math.floor(Math.random()*words.length)];
-    console.log(answer);
-    
-    const input = document.getElementById('input');
-    input.addEventListener('change', entered);
-}
+         function setAnswer(text) {
+             words = text.trim().split("\n");
+             answer=words[Math.floor(Math.random()*words.length)];
+             console.log(answer);
 
-function entered() {
-    var word=document.getElementById('input').value;
+             const input = document.getElementById('input');
+             input.addEventListener('change', entered);
+         }
 
-    feedback(word,answer);
-    if (word===answer) {
-        var s = document.createElement('p');
-        s.textContent="you win!";
-        document.body.appendChild(s);
-        document.body.removeChild(input);
-    } else {
-        input.value="";
-    }
-}
+         function entered() {
+             var word=document.getElementById('input').value;
 
-function feedback(word,answer) {
-    var ans = answer.split('');
+             feedback(word,answer);
+             if (word===answer) {
+                 var s = document.createElement('p');
+                 s.textContent="you win!";
+                 document.body.appendChild(s);
+                 document.body.removeChild(input);
+             } else {
+                 input.value="";
+             }
+         }
 
-    var wo = word.split('');
-    if (word.length!=4 || !words.includes(word)) {
-        var s = document.createElement('pre');
-        s.textContent="["+word+"] - invalid guess";
-        document.body.appendChild(s);
-        return;
-    }
+         function feedback(word,answer) {
+             var ans = answer.split('');
 
-    var right="";
-    for (var i=0; i<4; i++) {
-        if (ans[i]==wo[i]) {
-            right+="+";
-        }
-    }
-    var rightLetter="";
-    var rightN=right.length;
-    for (var i=0; i<4; i++) {
-        if (ans.includes(wo[i])) {
-            rightN--;
-            if (rightN<0) {
-                rightLetter+="/";
-            }
-        }
-    }
+             var wo = word.split('');
+             if (word.length!=4 || !words.includes(word)) {
+                 var s = document.createElement('pre');
+                 s.textContent="["+word+"] - invalid guess";
+                 document.body.appendChild(s);
+                 return;
+             }
 
-    var s = document.createElement('pre');
-    s.textContent=word+' ';
-    if (right.length==0 && rightLetter.length==0) {
-        s.textContent+='.';
-    } else {
-        s.textContent+=right+rightLetter;
-    }
+             var right="";
+             for (var i=0; i<4; i++) {
+                 if (ans[i]==wo[i]) {
+                     right+="+";
+                 }
+             }
+             var rightLetter="";
+             var rightN=right.length;
+             for (var i=0; i<4; i++) {
+                 if (ans.includes(wo[i])) {
+                     rightN--;
+                     if (rightN<0) {
+                         rightLetter+="/";
+                     }
+                 }
+             }
 
-    document.body.appendChild(s);
+             var s = document.createElement('pre');
+             s.textContent=word+' ';
+             if (right.length==0 && rightLetter.length==0) {
+                 s.textContent+='.';
+             } else {
+                 s.textContent+=right+rightLetter;
+             }
 
-}
-</script>
+             document.body.appendChild(s);
 
-</body>
+         }
+        </script>
+
+    </body>
 </html>
