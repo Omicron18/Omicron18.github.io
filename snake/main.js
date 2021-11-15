@@ -14,6 +14,12 @@ let e={key: 'j'};
 let a_x=undefined;
 let a_y=undefined;
 let alive=true;
+let paused=false;
+let score=0;
+
+const scoreElt = document.createElement('p');
+scoreElt.textContent="score: 0";
+document.body.appendChild(scoreElt);
 
 function isInSnake(x,y) {
     for (let i=0; i<snake.length; i++) {
@@ -61,6 +67,10 @@ function clear(i,j) {
 }
 
 function change_dir(x) {
+    if (x.key==='p') {
+        paused=!paused;
+        return;
+    }
     if (x.key==='ArrowUp') {
         e.key='k';
         return;
@@ -98,6 +108,8 @@ function move() {
     draw(new_i,new_j);
 
     if (new_i==a_x && new_j==a_y) {
+        score=score+1;
+        scoreElt.textContent="score: "+score;
         draw_apple();
         snake.unshift({x:new_i,y:new_j});
         for (let z=1; z<snake.length; z++) {
@@ -133,7 +145,9 @@ async function game() {
 
     while(alive) {
         await sleep(250);
-        move();
+        if (!paused) {
+            move();
+        }
     }
 }
 
