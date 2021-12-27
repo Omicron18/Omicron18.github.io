@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+<style>p {font-size:30px}</style>
 <p>Whose turn is it? </p>
 
 <script>
@@ -9,11 +9,20 @@
  var now = new Date();
  var c = new Date("2020-12-24");
  var days = Math.floor((now-c)/(60*60*24*1000));
- var s = document.createElement('pre');
- if (days % 2 == 0) {
-     s.textContent='Jenny says hi! And it\'s her choice!';
+ var s = document.createElement('p');
+// if (days % 2 == 0) {
+ if (false) {
+     s.style='color:purple';
+     s.textContent='Jenny! Hooray! Love you!';
  } else {
-     s.textContent='William\'s';
+     var s1 = document.createElement('p');
+     var s2 = document.createElement('p');
+     s1.textContent='Hello ';
+     s1.style='color:blue';
+     s2.textContent='William, your choice. Yee haa!!! ';
+     s2.style='color:green';
+     s.appendChild(s1);
+     s.appendChild(s2);
  }
 
  document.body.appendChild(s);
