@@ -11,8 +11,31 @@
  var days = Math.floor((now-c)/(60*60*24*1000));
  var s = document.createElement('p');
  if (days % 2 == 0) {
-     s.style='color:purple';
-     s.textContent='Jenny is 8 years old! Her choice!';
+	var s1=document.createElement('div');
+     s1.style='color:red;margin-left:0.1em';
+     s1.textContent='J';
+	s.appendChild(s1);
+	var s2=document.createElement('div');
+     s2.style='color:orange';
+     s2.textContent='E';
+	s.appendChild(s2);
+	var s3=document.createElement('div');
+     s3.style='color:yellow';
+     s3.textContent='N';
+	s.appendChild(s3);
+	var s4=document.createElement('div');
+     s4.style='color:lime';
+     s4.textContent='N';
+	s.appendChild(s4);
+	var s5=document.createElement('div');
+     s5.style='color:aqua';
+     s5.textContent='Y';
+	s.appendChild(s5);
+	var s6=document.createElement('div');
+     s6.style='color:fuchsia;margin-left:0.2em';
+     s6.textContent='!';
+	s.appendChild(s6);
+
  } else {
      var s1 = document.createElement('p');
      var s2 = document.createElement('p');
@@ -24,9 +47,8 @@
      s.appendChild(s2);
  }
 
- document.body.appendChild(s);
+document.body.appendChild(s);
 
 </script>
-
 </body>
 </html>
