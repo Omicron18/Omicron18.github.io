@@ -15,7 +15,7 @@ function entered() {
     }
 
     if(url.startsWith('https://t.co/')) {
-        fetch('https://t.co/FwSB1w4IZH', {cache:'no-cache'}).then(response => response.text() )
+        fetch(url, {cache:'no-cache'}).then(response => response.text() )
             .then(text => {
                 const d = new DOMParser();
                 next(d.parseFromString(text, "text/html").title);
