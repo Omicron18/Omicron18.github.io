@@ -42,4 +42,4 @@ function next(input_url) {
     window.location.replace(url);
 }
 
-// file:///home/timstorer/other/Omicron18.github.io/redirect/index.html?twitter.com=nitter.nixnet.services&youtu.be=piped.kavin.rocks
+// https://omicron18.github.io/redirect?twitter.com=nitter.nixnet.services&youtu.be=piped.kavin.rocks
