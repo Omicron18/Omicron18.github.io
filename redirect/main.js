@@ -9,12 +9,37 @@ function getInput(text) {
 }
 
 function entered() {
-    var input_url=document.getElementById('input').value;
+    var url=document.getElementById('input').value;
+    if(!url.startsWith('https://')) {
+        url='https://'+url;
+    }
 
-    var url=input_url.replace('twitter.com','nitter.nixnet.services');
-    var s=document.createElement('p');
+    if(url.startsWith('https://t.co/')) {
+        fetch('https://t.co/FwSB1w4IZH', {cache:'no-cache'}).then(response => response.text() )
+            .then(text => {
+                const d = new DOMParser();
+                next(d.parseFromString(text, "text/html").title);
+            });
+    } else {
+        next(url);
+    }
+}
+
+function next(input_url) {
+
+    var replacement_string=window.location.href.split('?')[1];
+    var replacements=replacement_string.split('&');
+    var url=input_url;
+    for (var rs of replacements) {
+        var r=rs.split('=');
+        url=url.replace(r[0],r[1]);
+    }
+
+    var s=document.createElement('a');
     s.textContent=url;
     s.href=url;
     document.body.appendChild(s);
     window.location.replace(url);
 }
+
+// file:///home/timstorer/other/Omicron18.github.io/redirect/index.html?twitter.com=nitter.nixnet.services&youtu.be=piped.kavin.rocks
