@@ -1,0 +1,1 @@
+Make a simple static webpage (HTML and JS, with no CSS, dependencies, build system) that has a simple timer.  Minimal controls: take the timer length in minutes from the url.  There should just be a button to start the timer.  When the timer finishes, a bell should sound (play an mp3 file).

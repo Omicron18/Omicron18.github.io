@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Timer</h1>
+    <p id="timerDisplay">00:00</p>
+    <button id="startButton">Start Timer</button>
+
+    <audio id="bellSound" src="bell.mp3" preload="auto"></audio>
+
+    <script>
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startButton = document.getElementById('startButton');
+        const bellSound = document.getElementById('bellSound');
+
+        let timerInterval;
+        let totalSeconds;
+
+        function getMinutesFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseInt(urlParams.get('minutes')) || 0;
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        function updateTimerDisplay() {
+            timerDisplay.textContent = formatTime(totalSeconds);
+        }
+
+        function startTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            const initialMinutes = getMinutesFromUrl();
+            if (initialMinutes <= 0) {
+                alert("Please specify a valid timer length in minutes in the URL, e.g., ?minutes=5");
+                return;
+            }
+
+            totalSeconds = initialMinutes * 60;
+            updateTimerDisplay();
+            startButton.disabled = true;
+
+            timerInterval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    bellSound.play();
+
+                    startButton.disabled = false;
+                    return;
+                }
+                totalSeconds--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        // Initialize display on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialMinutes = getMinutesFromUrl();
+            totalSeconds = initialMinutes * 60;
+            updateTimerDisplay();
+        });
+
+        startButton.addEventListener('click', startTimer);
+    </script>
+</body>
+</html>
