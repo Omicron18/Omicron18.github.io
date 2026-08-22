@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="canvas" height=920 width=950></canvas>
+
+<div>
+
+  <input type="range" id="size" name="size" min="20" max="90" style="width: 200px"/>
+  <label for="size">Grid size</label>
+</div>
+<div>
+  <input type="range" id="wall-density" name="volume" min="0" max="100" style="width: 200px"/>
+  <label for="volume">Wall density</label>
+</div>
+
+<fieldset>
+
+  <div>
+    <input type="radio" name="radio" id="bfs" value="bfs" checked />
+    <label for="bfs">BFS</label>
+  </div>
+
+  <div>
+    <input type="radio" name="radio" id="dfs" value="dfs" />
+    <label for="dfs">DFS</label>
+  </div>
+    <div>
+      <button id="submit">Start</button>
+    </div>
+</fieldset>
+
+
+<script src="./main.js">
+</script>
+
+</body>
+</html>
